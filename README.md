@@ -38,7 +38,7 @@ Stock data is from  this api website - [alphavantage](https://www.alphavantage.c
 6. [ ] Generate the word_embedding model, using reverb-result  (2018-05-29).
 
 7. [ ] Generate embedding_matrix, using Keras's tool (2018-05-30).
-8. [ ] Construct the neural network model (2018-05-30).
+8. [ ] Construct the neural network model(Event-LSTM) (2018-05-30).
 9. [ ] Train and predict (2018-05-31).
 10. [ ] If the predict's result dont bigger than 65%, to find and modify the errors (2018-06-01).
 11. [ ] Generate the final project documents and slides  (2018-06-18).
