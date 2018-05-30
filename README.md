@@ -34,8 +34,8 @@ Stock data is from  this api website - [alphavantage](https://www.alphavantage.c
 6. [x] Using the Reverb technology to split a news title sentence of all news's data to the three part format (2018-05-29).
 
 7. [x] Generate the word_embedding model, using reverb-result  (2018-05-30).
-8. [ ] Generate embedding_matrix, using Keras's tool (2018-05-30).
-9. [ ] Construct the neural network model(Event-LSTM) (2018-05-30).
-10. [ ] Train and predict (2018-05-31).
+8. [x] Generate embedding_matrix, using Keras's tool (2018-05-30).
+9. [x] Construct the neural network model(Event-LSTM) (2018-05-30).
+10. [x] Train and predict (2018-05-30).
 11. [ ] If the predict's result dont bigger than 65%, to find and modify the errors (2018-06-01).
 12. [ ] Generate the final project documents and slides  (2018-06-18).
