@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[48]:
+# In[147]:
 
 
 # coding: utf-8
@@ -30,7 +30,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-# In[49]:
+# In[148]:
 
 
 def text_to_index(corpus):
@@ -48,7 +48,7 @@ def text_to_index(corpus):
     return np.array(new_corpus)
 
 
-# In[50]:
+# In[149]:
 
 
 # get data
@@ -77,7 +77,7 @@ for text in test_texts:
     texts_list.append(text)
 
 
-# In[51]:
+# In[150]:
 
 
 # get word embedding vector
@@ -92,13 +92,13 @@ vocab_num = len(wvv.items()) + 1
 vocab_list = [(word, word_vectors[word]) for word, _ in wvv.items()]
 
 
-# In[52]:
+# In[151]:
 
 
 del word_vectors, wvv, train_texts_list, answer
 
 
-# In[53]:
+# In[152]:
 
 
 word_vec_len = 50
@@ -111,13 +111,13 @@ for i, vocab in enumerate(vocab_list):
     word2idx[word] = i + 1
 
 
-# In[54]:
+# In[153]:
 
 
 embedding_matrix.shape
 
 
-# In[55]:
+# In[154]:
 
 
 embedding_layer = Embedding( input_dim= embedding_matrix.shape[0],output_dim= 50, weights=[embedding_matrix], 
@@ -141,7 +141,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.summary()
 
 
-# In[56]:
+# In[167]:
 
 
 max_doc_word_length = 200
@@ -159,14 +159,14 @@ for ids in range(0, 6577):
 print(Y_label_list.shape)
 
 
-# In[65]:
+# In[176]:
 
 
-history = model.fit(x = X_train[0:6577], y = Y_label_list,  
+history = model.fit(x = X_train[0:6377], y = Y_label_list[0:6377],  
                     batch_size= 100,  epochs = 200, verbose = 1)
 
 
-# In[66]:
+# In[177]:
 
 
 np_loss_history = np.array(history.history['loss'])
@@ -193,20 +193,20 @@ plt.plot(x, loss_history, '-g');  # dotted red
 plt.show()
 
 
-# In[67]:
+# In[178]:
 
 
 # model.save('my_model.h5') 
 
 
-# In[141]:
+# In[179]:
 
 
 # evaluate the model
 loss_accuracy = model.evaluate(X_train[0:100], Y_label_list[0:100], verbose=1)
 print(type(loss_accuracy), loss_accuracy)
 
-test_sequences1 = X_train[6177:6577]
+test_sequences1 = X_train[6377:6577]
 
 predict_res = model.predict(test_sequences1, batch_size= 100, verbose=0)
 
@@ -216,7 +216,7 @@ predict_res = model.predict(test_sequences1, batch_size= 100, verbose=0)
 # print(predict_res[0:20])
 
 
-# In[142]:
+# In[180]:
 
 
 # 格式化輸出結果成 1 和 0
@@ -232,13 +232,13 @@ for pv,fv in zip(predict_res[0:RIGHT_INDEX], final_res[0:RIGHT_INDEX]):
 # print(final_res[:20])
 
 
-# In[146]:
+# In[184]:
 
 
 # 和真實的股票指數變化比較，輸出預測的準確率
-x1 = final_res[0:]
+x1 = final_res[100:]
 x2 = []
-for val in Y_label_list[6177:]:
+for val in Y_label_list[6477:]:
     x2.append(val[0])
 
 acc_i = 0
@@ -251,7 +251,7 @@ print("預測準確率爲： ", acc_i / len(x1))
 # print(type(x1), type(x2), x2)
 
 
-# In[145]:
+# In[182]:
 
 
 # # result_txt = "result" + str(datetime.now()).split()[1] + ".txt"
