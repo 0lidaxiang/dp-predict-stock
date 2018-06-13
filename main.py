@@ -1,12 +1,10 @@
 
 # coding: utf-8
 
-# In[147]:
+# In[1]:
 
 
 # coding: utf-8
-import warnings
-warnings.filterwarnings('ignore')
 import time
 import os
 import numpy as np
@@ -30,7 +28,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-# In[148]:
+# In[2]:
 
 
 def text_to_index(corpus):
@@ -48,7 +46,7 @@ def text_to_index(corpus):
     return np.array(new_corpus)
 
 
-# In[149]:
+# In[3]:
 
 
 # get data
@@ -77,7 +75,7 @@ for text in test_texts:
     texts_list.append(text)
 
 
-# In[150]:
+# In[4]:
 
 
 # get word embedding vector
@@ -92,13 +90,13 @@ vocab_num = len(wvv.items()) + 1
 vocab_list = [(word, word_vectors[word]) for word, _ in wvv.items()]
 
 
-# In[151]:
+# In[5]:
 
 
 del word_vectors, wvv, train_texts_list, answer
 
 
-# In[152]:
+# In[6]:
 
 
 word_vec_len = 50
@@ -111,37 +109,31 @@ for i, vocab in enumerate(vocab_list):
     word2idx[word] = i + 1
 
 
-# In[153]:
+# In[7]:
 
 
 embedding_matrix.shape
 
 
-# In[154]:
+# In[34]:
 
 
 embedding_layer = Embedding( input_dim= embedding_matrix.shape[0],output_dim= 50, weights=[embedding_matrix], 
                             input_length = 200,trainable=False)
-# model = getModel(embedding_layer, image_width, image_height, input_channel)
-# model.add(Conv1D(100, 3,padding = 'same', ))
-# model.add(Flatten())
-# model.add(Dense(2, activation='softmax'))
-# model.compile(loss='mean_squared_error', optimizer='sgd')
 
 model = Sequential()
 model.add(embedding_layer)
 model.add(LSTM(16))    
 model.add(Dense(40, activation='relu'))
 model.add(Dense(20, activation='relu'))
-# model.add(Dense(2, activation='softmax'))
-# model.compile(optimizer='sgd',loss='mean_squared_error',  metrics=["accuracy"])
+
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 model.summary()
 
 
-# In[167]:
+# In[35]:
 
 
 max_doc_word_length = 200
@@ -159,14 +151,15 @@ for ids in range(0, 6577):
 print(Y_label_list.shape)
 
 
-# In[176]:
+# In[36]:
 
 
+epochs_num = 50
 history = model.fit(x = X_train[0:6377], y = Y_label_list[0:6377],  
-                    batch_size= 100,  epochs = 200, verbose = 1)
+                    batch_size= 100,  epochs = 50, verbose = 1)
 
 
-# In[177]:
+# In[37]:
 
 
 np_loss_history = np.array(history.history['loss'])
@@ -180,7 +173,7 @@ acc_history = np.loadtxt("acc_history.txt")
 print("accuracy 準確度: ")
 fig = plt.figure(1)
 ax = plt.axes()
-x = np.linspace(0, 1, acc_history.shape[0])
+x = np.linspace(0, epochs_num, acc_history.shape[0])
 plt.plot(x, acc_history, '-r');  # dotted red
 plt.show()
 
@@ -188,18 +181,18 @@ plt.show()
 print("loss 損失函數: ")
 fig = plt.figure(2)
 ax = plt.axes()
-x = np.linspace(0, 1, loss_history.shape[0])
+x = np.linspace(0, epochs_num, loss_history.shape[0])
 plt.plot(x, loss_history, '-g');  # dotted red
 plt.show()
 
 
-# In[178]:
+# In[22]:
 
 
 # model.save('my_model.h5') 
 
 
-# In[179]:
+# In[23]:
 
 
 # evaluate the model
@@ -208,7 +201,7 @@ print(type(loss_accuracy), loss_accuracy)
 
 test_sequences1 = X_train[6377:6577]
 
-predict_res = model.predict(test_sequences1, batch_size= 100, verbose=0)
+predict_res = model.predict(test_sequences1, batch_size= 1, verbose=0)
 
 # final_res = []
 # for pre_res in predict_res:
@@ -216,7 +209,7 @@ predict_res = model.predict(test_sequences1, batch_size= 100, verbose=0)
 # print(predict_res[0:20])
 
 
-# In[180]:
+# In[24]:
 
 
 # 格式化輸出結果成 1 和 0
@@ -232,10 +225,10 @@ for pv,fv in zip(predict_res[0:RIGHT_INDEX], final_res[0:RIGHT_INDEX]):
 # print(final_res[:20])
 
 
-# In[184]:
+# In[25]:
 
 
-# 和真實的股票指數變化比較，輸出預測的準確率
+# 和真實的股票指數的變化比較，輸出預測的準確率
 x1 = final_res[100:]
 x2 = []
 for val in Y_label_list[6477:]:
@@ -248,10 +241,44 @@ for v1,v2 in zip(x1, x2):
     if compare_res:
         acc_i += 1
 print("預測準確率爲： ", acc_i / len(x1))
+
+
+# In[32]:
+
+
+pre_ress = np.random.randint(2, size=10)
+acc_j = 0
+# print(pre_ress)
+for v1,v2 in zip(pre_ress, x2):
+    compare_res = (v1 == v2)
+#     print(compare_res)
+    if compare_res:
+        acc_j += 1
+print("random 1 準確率爲： ", acc_j / len(pre_ress))
+
+pre_ress = np.random.randint(2, size=10)
+acc_j = 0
+# print(pre_ress)
+for v1,v2 in zip(pre_ress, x2):
+    compare_res = (v1 == v2)
+#     print(compare_res)
+    if compare_res:
+        acc_j += 1
+print("random 2 準確率爲： ", acc_j / len(pre_ress))
+
+pre_ress = np.random.randint(2, size=10)
+acc_j = 0
+# print(pre_ress)
+for v1,v2 in zip(pre_ress, x2):
+    compare_res = (v1 == v2)
+#     print(compare_res)
+    if compare_res:
+        acc_j += 1
+print("random 3 準確率爲： ", acc_j / len(pre_ress))
 # print(type(x1), type(x2), x2)
 
 
-# In[182]:
+# In[27]:
 
 
 # # result_txt = "result" + str(datetime.now()).split()[1] + ".txt"
