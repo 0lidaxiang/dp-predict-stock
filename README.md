@@ -4,8 +4,8 @@ Final project of NTUST CS5144701  Practices of Deep Learning course.
 The goal of this project is to improve the performance of [this paper](https://www.ijcai.org/Proceedings/15/Papers/329.pdf) by using RNN-LSTM model instead of EB-CNN for prediction.
 
 
-## Usages
-### Scripts in This Project  
+## Training Guide  
+### Scripts in this project  
 | Script                 | Description             |
 | ---------------------- | ----------------------- |
 | `process_data.ipynb`   | Fetch data from stock price API and news dataset and generate data frame pickle file `train.pkl`.
@@ -14,7 +14,7 @@ The goal of this project is to improve the performance of [this paper](https://w
 | `main.ipynb`           | Model training and evaluation.
 
 
-### Reverb Usage  
+### Reverb usage  
 Download jar from the [Reverb Website](http://reverb.cs.washington.edu/README.html)
 Prepare newsdata.txt and run:
 ```
@@ -22,7 +22,7 @@ java -Xmx512m -jar ./test-reverb/reverb.jar reverb_pre.txt reverb_result.txt
 ```
 
 
-## About Dataset
+## About the Datasets
 - News dataset: [financial-news-dataset](https://github.com/philipperemy/financial-news-dataset) includes 450,341 news from Bloomberg and 109,110 news from Reuters within the date range from 2000 to 2013.
 
 - Stock price dataset: [alphavantage](https://www.alphavantage.co) API.
