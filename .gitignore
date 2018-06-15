@@ -99,3 +99,13 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+# Project intermediate outputs
+/train.pkl
+/train_reduce.pkl
+/reverb_pre.txt
+/reverb_result.txt
+/acc_history.txt
+/word2vec.model
+
