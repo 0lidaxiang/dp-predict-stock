@@ -110,7 +110,9 @@ ENV/
 /word2vec.model
 /acc_history.txt
 /loss_history.txt
+/evaluation_history.txt
 
 # Models
+/models_intermediate
 /models
 
