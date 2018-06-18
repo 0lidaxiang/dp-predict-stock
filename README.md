@@ -1,27 +1,39 @@
 # dp-predict-stock
-This is the final project of NTUST CS5144701  Practices of Deep Learning course.  
-Used re-constructed news title data to predict stock by deep learning(LSTM).
+Final project of NTUST CS5144701  Practices of Deep Learning course.  
 
-And this project‘goal is to improve the performance of [this paper](https://www.ijcai.org/Proceedings/15/Papers/329.pdf)'s
-result.That paper uses the CNN neural network.
+The goal of this project is to improve the performance of [this paper](https://www.ijcai.org/Proceedings/15/Papers/329.pdf) by using RNN-LSTM model instead of EB-CNN for prediction.
 
-## Used Technology & Library
+
+## Training Guide  
+### Scripts in this project  
+| Script                 | Description             |
+| ---------------------- | ----------------------- |
+| `process_data.ipynb`   | Fetch data from stock price API and news dataset and generate data frame pickle file `train.pkl`.
+| `reverb.ipynb`         | Preprocess data for reverb OpenIE phrase extraction `reverb_pre.txt` and extract the result `reverb_result.txt` for training model `train_reduce.pkl`. 
+| `word2Vec.ipynb`       | Produce word embedding model `word2vec.model`.
+| `main.ipynb`           | Model training and evaluation.
+
+
+### Reverb usage  
+Download jar from the [Reverb Website](http://reverb.cs.washington.edu/README.html)
+Prepare newsdata.txt and run:
+```
+java -Xmx512m -jar ./test-reverb/reverb.jar reverb_pre.txt reverb_result.txt
+```
+
+
+## About the Datasets
+- News dataset: [financial-news-dataset](https://github.com/philipperemy/financial-news-dataset) includes 450,341 news from Bloomberg and 109,110 news from Reuters within the date range from 2000 to 2013.
+
+- Stock price dataset: [alphavantage](https://www.alphavantage.co) API.
+
+
+## References
 + [Reverb](http://reverb.cs.washington.edu/README.html)  
 + [LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory)  
 + [CNN](https://en.wikipedia.org/wiki/Convolutional_neural_network)    
 + [Stanford-OpenIE-Python](https://github.com/philipperemy/Stanford-OpenIE-Python)  
 
-**How to Use reverb**  
-Go to the website [Reverb](http://reverb.cs.washington.edu/README.html) and download jar file.  
-Prepare the newsdata.txt file. And run this comamnd:
-```
-java -Xmx512m -jar ./test_reverb/reverb.jar reverb_pre.txt reverb_result.txt
-```
-
-## Dataset
-This [financial-news-dataset](https://github.com/philipperemy/financial-news-dataset) is from Bloomberg and Reuters, including 450,341 news from Bloomberg and 109,110 news from Reuters.
-
-Stock data is from  this api website - [alphavantage](https://www.alphavantage.co).
 
 ## Progress
 1. [x] Decide using which dataset, including stock data and news data (2018-05-20).
