@@ -1,0 +1,11 @@
+numpy
+keras
+sklearn
+pandas
+gensim
+nbformat
+sklearn
+matplotlib
+ipywidgets
+h5py
+
