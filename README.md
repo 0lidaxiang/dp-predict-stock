@@ -34,6 +34,11 @@ java -Xmx512m -jar ./test-reverb/reverb.jar reverb_pre.txt reverb_result.txt
 + [CNN](https://en.wikipedia.org/wiki/Convolutional_neural_network)    
 + [Stanford-OpenIE-Python](https://github.com/philipperemy/Stanford-OpenIE-Python)  
 
+## How to Run
+1. process
+2. reverb & local command
+3. word2Vec
+4. main
 
 ## Progress
 1. [x] Decide using which dataset, including stock data and news data (2018-05-20).
